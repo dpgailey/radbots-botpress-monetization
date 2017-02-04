@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Advertise from './advertise';
 
 class Radbots {
 	constructor(bp, config) {
@@ -34,7 +35,14 @@ class Radbots {
 	}
 
 	_handleSuccessResponse(res) {
-		return res.data;
+		if (res.data.error) {
+			return this._handleErrorResponse(res.data.error);
+		}
+		if (!res.data.ad) {
+			return this._handleErrorResponse('No ad object found on the response.');
+		}
+
+		return new Advertise(res.data.ad);
 	}
 
 	_handleErrorResponse(err) {
