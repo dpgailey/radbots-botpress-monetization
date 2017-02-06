@@ -1,15 +1,15 @@
 {
   "name": "botpress-radbots",
   "version": "1.0.0",
-  "description": "Radbots connector for botpress",
+  "description": "RadBots connector for botpress",
   "main": "bin/node.bundle.js",
   "botpress": {
-    "menuText": "Radbots",
+    "menuText": "RadBots",
     "menuIcon": "extension",
     "webBundle": "bin/web.bundle.js"
   },
   "keywords": [
-    "radbots",
+    "RadBots",
     "advertise",
     "botpress"
   ],
@@ -18,7 +18,7 @@
     "watch": "node webpack.js --watch",
     "compile": "node webpack.js --compile"
   },
-  "author": "Radbots",
+  "author": "RadBots",
   "license": "AGPL-3.0",
   "repository": {
     "type": "git",

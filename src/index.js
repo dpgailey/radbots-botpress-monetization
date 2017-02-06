@@ -36,7 +36,7 @@ module.exports = {
 			order: 100,
 			handler: outgoingMiddleware,
 			module: 'botpress-radbots',
-			description: 'Sends out advertise from radbots api'
+			description: 'Sends out advertise from RadBots api'
 		});
 
 		bp.radbots = {};

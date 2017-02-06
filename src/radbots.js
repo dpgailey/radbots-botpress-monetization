@@ -47,11 +47,11 @@ class Radbots {
 
 	_handleErrorResponse(err) {
 		if (err.response) {
-			throw new Error(`Error from radbots module: ${err.response.data}`);
+			throw new Error(`Error from RadBots module: ${err.response.data}`);
 		} else if (err.message) {
-			throw new Error(`Error from radbots module: ${err.message}`);
+			throw new Error(`Error from RadBots module: ${err.message}`);
 		} else {
-			throw new Error(`Error from radbots module: ${err}`)
+			throw new Error(`Error from RadBots module: ${err}`)
 		}
 	}
 }

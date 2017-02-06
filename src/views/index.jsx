@@ -148,7 +148,7 @@ export default class RadbotsModule extends React.Component {
 		return (
 			<Form horizontal>
 				<div className={style.section}>
-					{this.renderHeader('Configure Radbots')}
+					{this.renderHeader('Configure RadBots')}
 					<div>
 						{this.renderTextInput('Agent Key*', 'agentKey', 'https://radbots.com/documentation/developers')}
 						{this.renderTextInput('Account Key*', 'accountKey', 'https://radbots.com/documentation/marketplace')}
@@ -175,7 +175,7 @@ export default class RadbotsModule extends React.Component {
 		return (this.state.agentKey && this.state.accountKey) ? undefined : <Panel>
 			<Row>
 				<Col xs={12} sm={6} md={8}>
-					<h4>To get Agent key and Account key, Sign up/Sign in Radbots.</h4>
+					<h4>To get Agent key and Account key, Sign up/Sign in RadBots.</h4>
 				</Col>
 				<Col xs={6} sm={3} md={2}>
 					<a className={`btn btn-success btn-block ${style.radbotsButton} btn-lg`} href="https://radbots.com/users/sign_up" target="_blank">Sign Up</a>
@@ -190,7 +190,7 @@ export default class RadbotsModule extends React.Component {
 	renderErrorAlert() {
 		return (
 			<Alert bsStyle="danger" onDismiss={this.handleDismissError}>
-				<h4>An error occurred during communication with Radbots</h4>
+				<h4>An error occurred during communication with RadBots</h4>
 				<p>Details: {this.state.error}</p>
 			</Alert>
 		)
