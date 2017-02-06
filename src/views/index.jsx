@@ -6,7 +6,9 @@ import {
 	Col,
 	Button,
 	ControlLabel,
-	Alert
+	Alert,
+	Row,
+	Panel
 } from 'react-bootstrap'
 
 import style from './style.scss'
@@ -49,11 +51,7 @@ export default class RadbotsModule extends React.Component {
 	getStateHash() {
 		const hashingStateItems = [
 			'agentKey',
-			'mediaType',
-			'context',
-			'personaId',
-			'tags',
-			'intent'
+			'accountKey'
 		];
 
 		return hashingStateItems.map((i) => {
@@ -121,7 +119,7 @@ export default class RadbotsModule extends React.Component {
 
 	renderHeaderSaveButton() {
 		return (
-			<Button className={style.messengerButton} onClick={this.handleSaveChanges}>
+			<Button className={style.radbotsButton} onClick={this.handleSaveChanges}>
 				Save
 			</Button>
 		)
@@ -131,7 +129,7 @@ export default class RadbotsModule extends React.Component {
 		return (
 			<FormGroup>
 				<Col smOffset={3} sm={7}>
-					<Button className={style.messengerButton} onClick={this.handleSaveChanges}>
+					<Button className={style.radbotsButton} onClick={this.handleSaveChanges}>
 						Save
 					</Button>
 				</Col>
@@ -153,11 +151,7 @@ export default class RadbotsModule extends React.Component {
 					{this.renderHeader('Configure Radbots')}
 					<div>
 						{this.renderTextInput('Agent Key*', 'agentKey', 'https://radbots.com/documentation/developers')}
-						{this.renderTextInput('Media Types', 'mediaType', 'https://radbots.com/documentation/developers')}
-						{this.renderTextInput('Context', 'context', 'https://radbots.com/documentation/developers')}
-						{this.renderTextInput('Persona Id', 'personaId', 'https://radbots.com/documentation/developers')}
-						{this.renderTextInput('Tags', 'tags', 'https://radbots.com/documentation/developers')}
-						{this.renderTextInput('Intent', 'intent', 'https://radbots.com/documentation/developers')}
+						{this.renderTextInput('Account Key*', 'accountKey', 'https://radbots.com/documentation/marketplace')}
 						{this.renderSaveButton()}
 					</div>
 				</div>
@@ -177,6 +171,22 @@ export default class RadbotsModule extends React.Component {
 			: null
 	}
 
+	renderHelp() {
+		return (this.state.agentKey && this.state.accountKey) ? undefined : <Panel>
+			<Row>
+				<Col xs={12} sm={6} md={8}>
+					<h4>To get Agent key and Account key, Sign up/Sign in Radbots.</h4>
+				</Col>
+				<Col xs={6} sm={3} md={2}>
+					<a className={`btn btn-success btn-block ${style.radbotsButton} btn-lg`} href="https://radbots.com/users/sign_up" target="_blank">Sign Up</a>
+				</Col>
+				<Col xs={6} sm={3} md={2}>
+					<a className={`btn btn-success btn-block ${style.radbotsButton} btn-lg`} href="https://radbots.com/users/sign_in" target="_blank">Sign In</a>
+				</Col>
+			</Row>
+		</Panel>;
+	}
+
 	renderErrorAlert() {
 		return (
 			<Alert bsStyle="danger" onDismiss={this.handleDismissError}>
@@ -191,6 +201,7 @@ export default class RadbotsModule extends React.Component {
 			{this.state.error ? this.renderErrorAlert() : null}
 			{this.renderUnsavedAlert()}
 			{this.renderMessageAlert()}
+			{this.renderHelp()}
 			{this.renderForm()}
 		</div>
 	}

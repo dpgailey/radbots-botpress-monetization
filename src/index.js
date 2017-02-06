@@ -6,11 +6,7 @@ const loadConfigFromFile = file => {
 	if (!fs.existsSync(file)) {
 		const config = {
 			agentKey: '',
-			mediaType: '',
-			context: '',
-			personaId: '',
-			tags: '',
-			intent: ''
+			accountKey: ''
 		};
 		saveConfigToFile(config, file)
 	}
