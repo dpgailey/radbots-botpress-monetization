@@ -8,7 +8,8 @@ import {
 	ControlLabel,
 	Alert,
 	Row,
-	Panel
+	Panel,
+	Glyphicon
 } from 'react-bootstrap'
 
 import style from './style.scss'
@@ -44,8 +45,30 @@ export default class RadbotsModule extends React.Component {
 
 				setImmediate(() => {
 					this.setState({initialStateHash: this.getStateHash()})
-				})
+				});
+
+				this.getMetricsData();
 			});
+	}
+
+	getMetricsData() {
+		let agentKey = this.state.agentKey || null;
+		let accountKey = this.state.accountKey || null;
+
+		if(agentKey && accountKey) {
+			this.getAxios().get(`https://radbots.com/api/agents/${agentKey}/revenue?account_key=${accountKey}`)
+				.then((res) => {
+					this.setState({
+						...res.data, // revenue obj will be set
+						error: null
+					});
+				}, (error) => {
+					this.setState({
+						error: "Invalid Agent Key or Account Key",
+						revenue: null
+					});
+				});
+		}
 	}
 
 	getStateHash() {
@@ -62,7 +85,7 @@ export default class RadbotsModule extends React.Component {
 	handleSaveChanges() {
 		this.setState({loading: true});
 
-		return this.getAxios().post('/api/botpress-radbots/config', _.omit(this.state, 'loading', 'initialStateHash', 'message', 'error'))
+		return this.getAxios().post('/api/botpress-radbots/config', _.omit(this.state, 'loading', 'initialStateHash', 'message', 'error', 'revenue'))
 			.then(() => {
 				this.setState({
 					message: {
@@ -71,7 +94,9 @@ export default class RadbotsModule extends React.Component {
 					},
 					loading: false,
 					initialStateHash: this.getStateHash()
-				})
+				});
+
+				this.getMetricsData();
 			})
 			.catch((err) => {
 				this.setState({
@@ -120,7 +145,7 @@ export default class RadbotsModule extends React.Component {
 	renderHeaderSaveButton() {
 		return (
 			<Button className={style.radbotsButton} onClick={this.handleSaveChanges}>
-				Save
+				<Glyphicon glyph="ok"/> Save
 			</Button>
 		)
 	}
@@ -130,7 +155,7 @@ export default class RadbotsModule extends React.Component {
 			<FormGroup>
 				<Col smOffset={3} sm={7}>
 					<Button className={style.radbotsButton} onClick={this.handleSaveChanges}>
-						Save
+						<Glyphicon glyph="ok"/> Save
 					</Button>
 				</Col>
 			</FormGroup>
@@ -159,6 +184,39 @@ export default class RadbotsModule extends React.Component {
 		)
 	}
 
+	renderIncome() {
+		const title = (
+			<h3 className={style.radbotsIncomeHeader}>CTR Income Metrics</h3>
+		);
+		return (this.state.agentKey && this.state.accountKey && this.state.revenue) ? <Panel header={title}>
+				<Row>
+					<Col xs={12} sm={3} md={3} className={style.borderRight}>
+						<div className={style.getMetricSegmentContainer}>
+							<div>Today</div>
+							<div className={style.radbotsIncomeValue}>{this.state.revenue.day}</div>
+						</div>
+					</Col>
+					<Col xs={12} sm={3} md={3} className={style.borderRight}>
+						<div className={style.getMetricSegmentContainer}>
+							<div>This Week</div>
+							<div className={style.radbotsIncomeValue}>{this.state.revenue.week}</div>
+						</div>
+					</Col>
+					<Col xs={12} sm={3} md={3} className={style.borderRight}>
+						<div className={style.getMetricSegmentContainer}>
+							<div>This Month</div>
+							<div className={style.radbotsIncomeValue}>{this.state.revenue.month}</div>
+						</div>
+					</Col>
+					<Col xs={12} sm={3} md={3} className={style.borderRight}>
+						<div className={style.getPaidBtnContainer}>
+							<a className={`btn btn-success btn-block ${style.radbotsButton} btn-lg`} href="https://radbots.com" target="_blank">Get Paid <Glyphicon glyph="menu-right"/></a>
+						</div>
+					</Col>
+				</Row>
+			</Panel> : undefined;
+	}
+
 	renderUnsavedAlert() {
 		return (this.state.initialStateHash && this.state.initialStateHash !== this.getStateHash())
 			? <Alert bsStyle='warning'>Be careful, you have unsaved changes in your configuration...</Alert>
@@ -178,10 +236,10 @@ export default class RadbotsModule extends React.Component {
 					<h4>To get Agent key and Account key, Sign up/Sign in RadBots.</h4>
 				</Col>
 				<Col xs={6} sm={3} md={2}>
-					<a className={`btn btn-success btn-block ${style.radbotsButton} btn-lg`} href="https://radbots.com/users/sign_up" target="_blank">Sign Up</a>
+					<a className={`btn btn-success btn-block ${style.radbotsButton} btn-lg`} href="https://radbots.com/users/sign_up" target="_blank"><Glyphicon glyph="user"/> Sign Up</a>
 				</Col>
 				<Col xs={6} sm={3} md={2}>
-					<a className={`btn btn-success btn-block ${style.radbotsButton} btn-lg`} href="https://radbots.com/users/sign_in" target="_blank">Sign In</a>
+					<a className={`btn btn-success btn-block ${style.radbotsButton} btn-lg`} href="https://radbots.com/users/sign_in" target="_blank"><Glyphicon glyph="user"/> Sign In</a>
 				</Col>
 			</Row>
 		</Panel>;
@@ -203,6 +261,7 @@ export default class RadbotsModule extends React.Component {
 			{this.renderMessageAlert()}
 			{this.renderHelp()}
 			{this.renderForm()}
+			{this.renderIncome()}
 		</div>
 	}
 
