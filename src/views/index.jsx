@@ -208,7 +208,7 @@ export default class RadbotsModule extends React.Component {
 							<div className={style.radbotsIncomeValue}>{this.state.revenue.month}</div>
 						</div>
 					</Col>
-					<Col xs={12} sm={3} md={3} className={style.borderRight}>
+					<Col xs={12} sm={3} md={3}>
 						<div className={style.getPaidBtnContainer}>
 							<a className={`btn btn-success btn-block ${style.radbotsButton} btn-lg`} href="https://radbots.com" target="_blank">Get Paid <Glyphicon glyph="menu-right"/></a>
 						</div>
