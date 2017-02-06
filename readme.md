@@ -35,7 +35,7 @@ Settings can also be set pragmatically by providing the settings in the `${modul
 
 ### Getting advertise from RadBots
 
-Here we are listening for `get-advertise` key. when we hear that, we simple call the RadBots api to get an advertise.
+Here we are listening for `get-advertise` key. when we hear that, we call the RadBots api to get an advertise.
 ```
 bp.hear('get-advertise', event => {
 	bp.radbots.getAdvertise().then(ad => {
@@ -45,7 +45,7 @@ bp.hear('get-advertise', event => {
 ```
 ### Getting customized advertise from RadBots
 
-Here we are listening for `get-custom-advertise` key. when we hear that, we simple call the RadBots api to get an advertise and pass some options to customize the advertise or adding meta values to the advertise you are receiveing.
+Here we are listening for `get-custom-advertise` key. when we hear that, we call the RadBots api to get an advertise and pass some options to customize the advertise or adding meta values to the advertise you are receiveing.
 ```
 bp.hear('get-custom-advertise', event => {
 	bp.radbots.getAdvertise({
