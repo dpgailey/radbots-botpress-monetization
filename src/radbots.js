@@ -17,17 +17,17 @@ class Radbots {
 		return this.config;
 	}
 
-	getAdvertise() {
+	getAdvertise(options = {}) {
 		let url = `https://radbots.com/api/ads`;
 
 		return axios.get(url, {
 			params: {
 				agent_key: this.config.agentKey || '',
-				media_type: this.config.mediaType || '',
-				context: this.config.context || '',
-				persona_id: this.config.personaId || '',
-				tags: this.config.tags || '',
-				intent: this.config.intent || '',
+				media_type: options.mediaType || '',
+				context: options.context || '',
+				persona_id: options.personaId || '',
+				tags: options.tags || '',
+				intent: options.intent || '',
 			}
 		})
 			.then(res => this._handleSuccessResponse(res))
