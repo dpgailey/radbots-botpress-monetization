@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import Radbots from './radbots';
+import Monetize from './monetize';
 
 const loadConfigFromFile = file => {
 	if (!fs.existsSync(file)) {
@@ -22,7 +22,7 @@ const saveConfigToFile = (config, file) => {
 	fs.writeFileSync(file, JSON.stringify(config));
 };
 
-let radbots = null;
+let monetize = null;
 
 const outgoingMiddleware = (event, next) => {
 	return next()
@@ -31,33 +31,33 @@ const outgoingMiddleware = (event, next) => {
 module.exports = {
 	init: function (bp) {
 		bp.middlewares.register({
-			name: 'radbots.sendAdvertise',
+			name: 'monetize.sendAdvertise',
 			type: 'outgoing',
 			order: 100,
 			handler: outgoingMiddleware,
-			module: 'botpress-radbots',
+			module: 'botpress-monetize',
 			description: 'Sends out advertise from RadBots api'
 		});
 
-		bp.radbots = {};
+		bp.monetize = {};
 	},
 	ready: function (bp) {
-		const file = path.join(bp.projectLocation, bp.botfile.modulesConfigDir, 'botpress-radbots.json')
+		const file = path.join(bp.projectLocation, bp.botfile.modulesConfigDir, 'botpress-monetize.json')
 		const config = loadConfigFromFile(file);
 
-		radbots = new Radbots(bp, config);
+		monetize = new Monetize(bp, config);
 
-		bp.radbots = radbots;
+		bp.monetize = monetize;
 
-		bp.getRouter('botpress-radbots')
+		bp.getRouter('botpress-monetize')
 			.get('/config', (req, res) => {
-				res.send(radbots.getConfig());
+				res.send(monetize.getConfig());
 			});
 
-		bp.getRouter('botpress-radbots')
+		bp.getRouter('botpress-monetize')
 			.post('/config', (req, res) => {
-				radbots.setConfig(req.body);
-				saveConfigToFile(radbots.getConfig(), file);
+				monetize.setConfig(req.body);
+				saveConfigToFile(monetize.getConfig(), file);
 				res.sendStatus(200);
 			});
 	}

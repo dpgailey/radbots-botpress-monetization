@@ -15,7 +15,7 @@ import {
 
 import style from './style.scss';
 
-export default class RadbotsModule extends React.Component {
+export default class MonetizeModule extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -37,7 +37,7 @@ export default class RadbotsModule extends React.Component {
 	}
 
 	componentDidMount() {
-		this.getAxios().get('/api/botpress-radbots/config')
+		this.getAxios().get('/api/botpress-monetize/config')
 			.then((res) => {
 				this.setState({
 					loading: false,
@@ -86,7 +86,7 @@ export default class RadbotsModule extends React.Component {
 	handleSaveChanges() {
 		this.setState({loading: true});
 
-		return this.getAxios().post('/api/botpress-radbots/config', _.omit(this.state, 'loading', 'initialStateHash', 'message', 'error', 'revenue'))
+		return this.getAxios().post('/api/botpress-monetize/config', _.omit(this.state, 'loading', 'initialStateHash', 'message', 'error', 'revenue'))
 			.then(() => {
 				this.setState({
 					message: {
@@ -228,10 +228,8 @@ export default class RadbotsModule extends React.Component {
 						<img className={style.radbotsLogo} src="https://i.imgur.com/5Uhq5OU.png" alt="RadBots Logo" width="100%"/>
 					</Col>
 					<Col xs={12} sm={12} md={7} mdPull={5} lg={8} lgPull={4}>
-						<h2>Radbots is a world-class, integrated, relevant, targeted ad content service.</h2>
-						<p>
-							To get started, <a className="btn btn-default btn-xs" href="https://radbots.com/users/sign_up" target="_blank">create an account</a> at RadBots.com if you don't have any. Then <a className="btn btn-default btn-xs" href="https://radbots.com/users/sign_in" target="_blank">Login</a>. After creating an agent, provide the Agent Key below. From the settings section, provide the Account Key. That's it!
-						</p>
+						<h2>RadBots is the first bot monetization platform</h2>
+						<p>To begin serving context and intent aware ads and recommendations, <a className="btn btn-default btn-xs" href="https://radbots.com/users/sign_up" target="_blank">create an account</a> or <a className="btn btn-default btn-xs" href="https://radbots.com/users/sign_in" target="_blank">login</a> at <a href="https://radbots.com" className={style.rawHref}>radbots.com</a>. Then create an `Agent`. Last, copy and paste the `Agent Key` and `Account Key` from the `settings` page below. That's it!</p>
 						<div className="btn-toolbar">
 							<a className={`btn ${style.radbotsButton}`} href="https://radbots.com/users/sign_in" target="_blank"><Glyphicon glyph="user"/> Sign In</a>
 							<a className={`btn btn-default`} href="https://radbots.com/documentation/developers" target="_blank"><Glyphicon glyph="align-left"/> Documentation</a>

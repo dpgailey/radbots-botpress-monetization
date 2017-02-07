@@ -1,7 +1,7 @@
 {
-  "name": "botpress-radbots",
+  "name": "botpress-monetize",
   "version": "1.0.0",
-  "description": "RadBots connector for botpress",
+  "description": "botpress monetize module powered by RadBots",
   "main": "bin/node.bundle.js",
   "botpress": {
     "menuText": "RadBots",
@@ -10,6 +10,7 @@
   },
   "keywords": [
     "RadBots",
+    "monetize",
     "advertise",
     "botpress"
   ],
