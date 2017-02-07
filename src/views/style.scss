@@ -3,6 +3,9 @@
   font-size: 18px;
   text-transform: none;
 }
+.radbotsLogo {
+  padding: 15px 0;
+}
 
 .borderRight {
   border-right: 1px solid #efefef;
@@ -24,18 +27,15 @@
 }
 
 .radbotsButton {
-  font-size: 14px;
   color: white;
   background-color: #58d1b0;
-  border: none;
-  text-align: center;
-  padding-left: 20px;
-  padding-right: 20px;
+  outline: none;
 
   transition: opacity .5s ease-in-out, background-color .15s ease-in-out;
 
-  &:hover {
+  &:hover, &:focus, &:hover, &:active {
     background-color: #48a78a;
     color: white;
+    outline: none;
   }
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
 	Form,
 	FormGroup,
@@ -9,10 +9,11 @@ import {
 	Alert,
 	Row,
 	Panel,
-	Glyphicon
-} from 'react-bootstrap'
+	Glyphicon,
+	Thumbnail
+} from 'react-bootstrap';
 
-import style from './style.scss'
+import style from './style.scss';
 
 export default class RadbotsModule extends React.Component {
 
@@ -146,7 +147,7 @@ export default class RadbotsModule extends React.Component {
 		return (
 			<FormGroup>
 				<Col smOffset={3} sm={7}>
-					<Button className={style.radbotsButton} onClick={this.handleSaveChanges}>
+					<Button className={`btn ${style.radbotsButton}`} onClick={this.handleSaveChanges}>
 						<Glyphicon glyph="ok"/> Save
 					</Button>
 				</Col>
@@ -200,7 +201,7 @@ export default class RadbotsModule extends React.Component {
 					</Col>
 					<Col xs={12} sm={3} md={3}>
 						<div className={style.getPaidBtnContainer}>
-							<a className={`btn btn-success btn-block ${style.radbotsButton} btn-lg`} href="https://radbots.com" target="_blank">Get Paid <Glyphicon glyph="menu-right"/></a>
+							<a className={`btn btn-block ${style.radbotsButton} btn-lg`} href="https://radbots.com" target="_blank">Get Paid <Glyphicon glyph="menu-right"/></a>
 						</div>
 					</Col>
 				</Row>
@@ -220,19 +221,25 @@ export default class RadbotsModule extends React.Component {
 	}
 
 	renderHelp() {
-		return (this.state.agentKey && this.state.accountKey) ? undefined : <Panel>
-			<Row>
-				<Col xs={12} sm={6} md={8}>
-					<h4>To get Agent key and Account key, Sign up/Sign in RadBots.</h4>
-				</Col>
-				<Col xs={6} sm={3} md={2}>
-					<a className={`btn btn-success btn-block ${style.radbotsButton} btn-lg`} href="https://radbots.com/users/sign_up" target="_blank"><Glyphicon glyph="user"/> Sign Up</a>
-				</Col>
-				<Col xs={6} sm={3} md={2}>
-					<a className={`btn btn-success btn-block ${style.radbotsButton} btn-lg`} href="https://radbots.com/users/sign_in" target="_blank"><Glyphicon glyph="user"/> Sign In</a>
-				</Col>
-			</Row>
-		</Panel>;
+		return (
+			<Panel>
+				<Row>
+					<Col xs={12} sm={12} md={5} mdPush={7} lg={4} lgPush={8}>
+						<img className={style.radbotsLogo} src="https://i.imgur.com/5Uhq5OU.png" alt="RadBots Logo" width="100%"/>
+					</Col>
+					<Col xs={12} sm={12} md={7} mdPull={5} lg={8} lgPull={4}>
+						<h2>Radbots is a world-class, integrated, relevant, targeted ad content service.</h2>
+						<p>
+							To get started, <a className="btn btn-default btn-xs" href="https://radbots.com/users/sign_up" target="_blank">create an account</a> at RadBots.com if you don't have any. Then <a className="btn btn-default btn-xs" href="https://radbots.com/users/sign_in" target="_blank">Login</a>. After creating an agent, provide the Agent Key below. From the settings section, provide the Account Key. That's it!
+						</p>
+						<div className="btn-toolbar">
+							<a className={`btn ${style.radbotsButton}`} href="https://radbots.com/users/sign_in" target="_blank"><Glyphicon glyph="user"/> Sign In</a>
+							<a className={`btn btn-default`} href="https://radbots.com/documentation/developers" target="_blank"><Glyphicon glyph="align-left"/> Documentation</a>
+						</div>
+					</Col>
+				</Row>
+			</Panel>
+		);
 	}
 
 	renderErrorAlert() {
