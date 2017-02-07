@@ -1,41 +1,3 @@
-:global(.form-control) {
-  margin-bottom: 5px;
-}
-
-:global(.panel-body) {
-  color: gray;
-}
-
-.section {
-  background-color: #fff;
-  //border-radius: 5px;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-}
-
-.header {
-  position: relative;
-  border-bottom: solid 1px #eeeeee;
-  margin-bottom: 20px;
-
-  h4 {
-    padding: 15px;
-    padding-left: 20px;
-    margin: 0;
-    color: gray;
-  }
-
-  button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-}
-
-.radbotsPanel {
-  color: gray;
-}
-
 .radbotsHeader {
   color: gray;
   font-size: 18px;
@@ -50,6 +12,7 @@
   padding: 20px 0;
   text-align: center;
 }
+
 .getPaidBtnContainer {
   margin: 39px auto;
   text-align: center;
