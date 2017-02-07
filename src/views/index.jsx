@@ -142,14 +142,6 @@ export default class RadbotsModule extends React.Component {
 		)
 	}
 
-	renderHeaderSaveButton() {
-		return (
-			<Button className={style.radbotsButton} onClick={this.handleSaveChanges}>
-				<Glyphicon glyph="ok"/> Save
-			</Button>
-		)
-	}
-
 	renderSaveButton() {
 		return (
 			<FormGroup>
@@ -162,31 +154,29 @@ export default class RadbotsModule extends React.Component {
 		)
 	}
 
-	renderHeader(title) {
-		return <div className={style.header}>
-			<h4>{title}</h4>
-			{this.renderHeaderSaveButton()}
-		</div>
-	}
-
 	renderForm() {
+		const title = (
+			<h3 className={style.radbotsHeader}>Configure RadBots</h3>
+		);
+
 		return (
-			<Form horizontal>
-				<div className={style.section}>
-					{this.renderHeader('Configure RadBots')}
-					<div>
-						{this.renderTextInput('Agent Key*', 'agentKey', 'https://radbots.com/documentation/developers')}
-						{this.renderTextInput('Account Key*', 'accountKey', 'https://radbots.com/documentation/marketplace')}
-						{this.renderSaveButton()}
-					</div>
-				</div>
-			</Form>
+			<Panel header={title}>
+				<Row>
+					<Col xs={12}>
+						<Form horizontal>
+							{this.renderTextInput('Agent Key*', 'agentKey', 'https://radbots.com/documentation/developers')}
+							{this.renderTextInput('Account Key*', 'accountKey', 'https://radbots.com/documentation/marketplace')}
+							{this.renderSaveButton()}
+						</Form>
+					</Col>
+				</Row>
+			</Panel>
 		)
 	}
 
 	renderIncome() {
 		const title = (
-			<h3 className={style.radbotsIncomeHeader}>CTR Income Metrics</h3>
+			<h3 className={style.radbotsHeader}>CTR Income Metrics</h3>
 		);
 		return (this.state.agentKey && this.state.accountKey && this.state.revenue) ? <Panel header={title}>
 				<Row>
