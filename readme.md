@@ -1,6 +1,6 @@
 # botpress-monetize (powered by RadBots)
 
-[Botpress](http://github.com/botpress/botpress) monetize module powered by [RadBots](https://radbots.com)
+Monetization plugin for [Botpress](http://github.com/botpress/botpress) (powered by [RadBots](https://radbots.com))
 
 ## Installation
 Monetize module can be installed using any of the following way:
