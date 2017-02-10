@@ -1,6 +1,6 @@
 {
   "name": "botpress-monetize",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "botpress monetization module powered by RadBots",
   "main": "bin/node.bundle.js",
   "botpress": {
